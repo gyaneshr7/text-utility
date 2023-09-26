@@ -15,6 +15,7 @@ export default function TextForm(props) {
             value={text}
             onChange={(e) => {
               setText(e.target.value);
+              e.preventDefault();
             }}
           ></textarea>
         </div>
@@ -26,7 +27,7 @@ export default function TextForm(props) {
         >
           Convert to Upper Case
         </button>
-        
+
         <button
           className="btn btn-primary mx-2"
           onClick={() => {
@@ -35,12 +36,42 @@ export default function TextForm(props) {
         >
           Convert to Lower Case
         </button>
+
+        <button
+          className="btn btn-primary mx-2 my-2"
+          onClick={() => {
+            setText("");
+          }}
+        >
+          Clear Text
+        </button>
       </div>
 
       <div className="container my-3">
         <h1>Your Text Summary</h1>
-        <p> <b>{text.split(" ").length} </b> words and <b>{text.length} </b>characters </p>
-        <p>{0.008 * text.split(" ").length} minutes read</p>
+        <p>
+          <b>
+            {
+              text.split(" ").filter((element) => {
+                return element.length > 0;
+              }).length
+            }{" "}
+          </b>
+          words and <b>{text.length} </b>characters
+        </p>
+        <p>
+          <b>{0.008 * text.split(" ").length}</b> minutes read
+        </p>
+        <p>
+          <b>
+            {
+              text.split(".").filter((element) => {
+                return element.length > 0;
+              }).length
+            }{" "}
+          </b>{" "}
+          sentences
+        </p>
         <h2>Preview</h2>
         <p>{text}</p>
       </div>
