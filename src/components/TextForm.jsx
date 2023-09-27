@@ -15,10 +15,10 @@ export default function TextForm(props) {
             value={text}
             onChange={(e) => {
               setText(e.target.value);
-              e.preventDefault();
             }}
           ></textarea>
         </div>
+
         <button
           className="btn btn-primary mx-2"
           onClick={() => {
@@ -45,6 +45,34 @@ export default function TextForm(props) {
         >
           Clear Text
         </button>
+
+        <button
+          className="btn btn-primary mx-2 my-2"
+          onClick={() => {
+            let string = "";
+            text
+              .split(" ")
+              .filter((element) => {
+                return element.length > 0;
+              })
+              .map((element) => {
+                string += element + " ";
+              });
+
+            setText(string);
+          }}
+        >
+          Remove extra spaces
+        </button>
+
+        <button
+          className="btn btn-primary mx-2 my-2"
+          onClick={() => {
+            navigator.clipboard.writeText(text);
+          }}
+        >
+          Copy Text
+        </button>
       </div>
 
       <div className="container my-3">
@@ -60,7 +88,13 @@ export default function TextForm(props) {
           words and <b>{text.length} </b>characters
         </p>
         <p>
-          <b>{0.008 * text.split(" ").length}</b> minutes read
+          <b>
+            {0.008 *
+              text.split(" ").filter((element) => {
+                return element.length > 0;
+              }).length}
+          </b>{" "}
+          minutes read
         </p>
         <p>
           <b>
@@ -68,7 +102,7 @@ export default function TextForm(props) {
               text.split(".").filter((element) => {
                 return element.length > 0;
               }).length
-            }{" "}
+            }
           </b>{" "}
           sentences
         </p>
