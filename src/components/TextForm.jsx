@@ -5,7 +5,12 @@ export default function TextForm(props) {
 
   return (
     <>
-      <div className="container">
+      <div
+        className="container"
+        style={{
+          color: props.mode === "light" ? "black" : "white",
+        }}
+      >
         <h1>{props.heading}</h1>
         <div className="mb-3">
           <textarea
@@ -15,6 +20,10 @@ export default function TextForm(props) {
             value={text}
             onChange={(e) => {
               setText(e.target.value);
+            }}
+            style={{
+              backgroundColor: props.mode === "light" ? "white" : "grey",
+              color: props.mode === "light" ? "black" : "white",
             }}
           ></textarea>
         </div>
@@ -75,7 +84,12 @@ export default function TextForm(props) {
         </button>
       </div>
 
-      <div className="container my-3">
+      <div
+        className="container my-3"
+        style={{
+          color: props.mode === "light" ? "black" : "white",
+        }}
+      >
         <h1>Your Text Summary</h1>
         <p>
           <b>
@@ -107,7 +121,7 @@ export default function TextForm(props) {
           sentences
         </p>
         <h2>Preview</h2>
-        <p>{text}</p>
+        <p>{text.length > 0 ? text : "Enter something"}</p>
       </div>
     </>
   );
