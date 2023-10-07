@@ -32,6 +32,7 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2"
           onClick={() => {
             setText(text.toUpperCase());
+            props.showAlert("Converted to UpperCase!", "success")
           }}
         >
           Convert to Upper Case
@@ -41,6 +42,7 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2"
           onClick={() => {
             setText(text.toLowerCase());
+            props.showAlert("Converted to LowerCase!", "success")
           }}
         >
           Convert to Lower Case
@@ -50,6 +52,7 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2 my-2"
           onClick={() => {
             setText("");
+            props.showAlert("Text cleared!", "success")
           }}
         >
           Clear Text
@@ -69,6 +72,7 @@ export default function TextForm(props) {
               });
 
             setText(string);
+            props.showAlert("Extra spaces removed!", "success")
           }}
         >
           Remove extra spaces
@@ -78,6 +82,7 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2 my-2"
           onClick={() => {
             navigator.clipboard.writeText(text);
+            props.showAlert("Copied to clipboard!", "success")
           }}
         >
           Copy Text
@@ -121,7 +126,7 @@ export default function TextForm(props) {
           sentences
         </p>
         <h2>Preview</h2>
-        <p>{text.length > 0 ? text : "Enter something"}</p>
+        <p>{text.length > 0 ? text : "Enter Something"}</p>
       </div>
     </>
   );
