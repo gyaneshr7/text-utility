@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const Navbar = (props) => {
   return (
@@ -7,9 +8,9 @@ const Navbar = (props) => {
       className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
     >
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           {props.title}
-        </a>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -25,31 +26,69 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
+              <Link className="nav-link active" aria-current="page" to="/">
                 Home
-              </a>
+              </Link>
             </li>
 
             <li className="nav-item">
-              <a className="nav-link" href="/">
+              <Link className="nav-link" to="/about">
                 {props.aboutText}
-              </a>
+              </Link>
             </li>
           </ul>
 
-          <div class={`form-check form-switch text-${props.mode === 'light' ? 'dark' : 'light'}`}>
+          <div style={{marginRight: '20px'}}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill={props.mode === "light" ? "green" : "white"}
+              className="bi bi-circle-fill my-2"
+              viewBox="0 0 16 16"
+              onClick={() => {
+                props.toggleMode("green");
+              }}
+            >
+              <circle cx="8" cy="8" r="8" />
+            </svg>
+          </div>
+          
+          <div style={{marginRight: '20px'}}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill={props.mode === "light" ? "blue" : "white"}
+              className="bi bi-circle-fill my-2"
+              viewBox="0 0 16 16"
+              onClick={() => {
+                props.toggleMode("blue");
+              }}
+            >
+              <circle cx="8" cy="8" r="8" />
+            </svg>
+          </div>
+
+          <div
+            class={`form-check form-switch text-${
+              props.mode === "light" ? "dark" : "light"
+            }`}
+          >
             <input
               className="form-check-input"
               type="checkbox"
               role="switch"
               id="flexSwitchCheckDefault"
-              onClick={props.toggleMode}
+              onClick={() => {
+                props.toggleMode("dark");
+              }}
             />
             <label
               className="form-check-label"
               htmlFor="flexSwitchCheckDefault"
             >
-              Enable {props.mode === 'light' ? 'Dark' : 'Light'} Mode
+              Enable {props.mode === "light" ? "Dark" : "Light"} Mode
             </label>
           </div>
         </div>
