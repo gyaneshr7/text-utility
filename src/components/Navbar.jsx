@@ -5,7 +5,9 @@ import { Link } from "react-router-dom";
 const Navbar = (props) => {
   return (
     <nav
-      className={`navbar navbar-expand-lg navbar-${props.mode} bg-${props.mode}`}
+      className={`navbar navbar-expand-lg navbar-${
+        props.mode !== "light" ? "dark" : "light"
+      } bg-${props.mode !== "light" ? "dark" : "light"}`}
     >
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -38,7 +40,7 @@ const Navbar = (props) => {
             </li>
           </ul>
 
-          <div style={{marginRight: '20px'}}>
+          <div className="d-flex" style={{ marginRight: "20px" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -46,6 +48,7 @@ const Navbar = (props) => {
               fill={props.mode === "light" ? "green" : "white"}
               className="bi bi-circle-fill my-2"
               viewBox="0 0 16 16"
+              cursor={"pointer"}
               onClick={() => {
                 props.toggleMode("green");
               }}
@@ -53,8 +56,8 @@ const Navbar = (props) => {
               <circle cx="8" cy="8" r="8" />
             </svg>
           </div>
-          
-          <div style={{marginRight: '20px'}}>
+
+          <div className="d-flex" style={{ marginRight: "20px" }}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -62,6 +65,7 @@ const Navbar = (props) => {
               fill={props.mode === "light" ? "blue" : "white"}
               className="bi bi-circle-fill my-2"
               viewBox="0 0 16 16"
+              cursor={"pointer"}
               onClick={() => {
                 props.toggleMode("blue");
               }}
@@ -71,7 +75,7 @@ const Navbar = (props) => {
           </div>
 
           <div
-            class={`form-check form-switch text-${
+            className={`form-check form-switch text-${
               props.mode === "light" ? "dark" : "light"
             }`}
           >

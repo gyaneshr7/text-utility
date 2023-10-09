@@ -3,6 +3,17 @@ import React, { useState } from "react";
 export default function TextForm(props) {
   const [text, setText] = useState("");
 
+  const determine = (text) => {
+    for (let key in text.split(" ").filter((element) => {
+      return element.length === 0;
+    })) {
+     if (key >= 0) {
+        return false;
+      }
+    }
+    return true;
+  };
+
   return (
     <>
       <div
@@ -11,7 +22,7 @@ export default function TextForm(props) {
           color: props.mode === "light" ? "black" : "white",
         }}
       >
-        <h1>{props.heading}</h1>
+        <h1 className="mb-3">{props.heading}</h1>
         <div className="mb-3">
           <textarea
             className="form-control"
@@ -22,7 +33,7 @@ export default function TextForm(props) {
               setText(e.target.value);
             }}
             style={{
-              backgroundColor: props.mode === "light" ? "white" : "grey",
+              backgroundColor: props.mode === "light" ? "white" : "#13466e",
               color: props.mode === "light" ? "black" : "white",
             }}
           ></textarea>
@@ -32,8 +43,9 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2"
           onClick={() => {
             setText(text.toUpperCase());
-            props.showAlert("Converted to UpperCase!", "success")
+            props.showAlert("Converted to UpperCase!", "success");
           }}
+          disabled={text.length === 0}
         >
           Convert to Upper Case
         </button>
@@ -42,8 +54,9 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2"
           onClick={() => {
             setText(text.toLowerCase());
-            props.showAlert("Converted to LowerCase!", "success")
+            props.showAlert("Converted to LowerCase!", "success");
           }}
+          disabled={text.length === 0}
         >
           Convert to Lower Case
         </button>
@@ -52,8 +65,9 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2 my-2"
           onClick={() => {
             setText("");
-            props.showAlert("Text cleared!", "success")
+            props.showAlert("Text cleared!", "success");
           }}
+          disabled={text.length === 0}
         >
           Clear Text
         </button>
@@ -72,8 +86,9 @@ export default function TextForm(props) {
               });
 
             setText(string);
-            props.showAlert("Extra spaces removed!", "success")
+            props.showAlert("Extra spaces removed!", "success");
           }}
+          disabled={text.length === 0 || determine(text)}
         >
           Remove extra spaces
         </button>
@@ -82,8 +97,9 @@ export default function TextForm(props) {
           className="btn btn-primary mx-2 my-2"
           onClick={() => {
             navigator.clipboard.writeText(text);
-            props.showAlert("Copied to clipboard!", "success")
+            props.showAlert("Copied to clipboard!", "success");
           }}
+          disabled={text.length === 0}
         >
           Copy Text
         </button>
@@ -126,7 +142,7 @@ export default function TextForm(props) {
           sentences
         </p>
         <h2>Preview</h2>
-        <p>{text.length > 0 ? text : "Enter Something"}</p>
+        <p>{text.length > 0 ? text : "Nothing to preview"}</p>
       </div>
     </>
   );

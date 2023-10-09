@@ -7,7 +7,7 @@ export const Alert = (props) => {
   };
 
   return (
-    <>
+    <div style={{height: '40px'}} id="alert">
       {props.alert && (
         <div
           className="alert alert-warning alert-dismissible fade show"
@@ -16,6 +16,6 @@ export const Alert = (props) => {
           <strong>{capitalize(props.alert.type)}</strong>: {props.alert.msg}
         </div>
       )}
-    </>
+    </div>
   );
 };

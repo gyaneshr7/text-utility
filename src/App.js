@@ -25,13 +25,14 @@ function App() {
     if (mode === "light") {
       setMode(theme);
 
-      if (theme === "dark") document.body.style.backgroundColor = "#042743";
-      else document.body.style.backgroundColor = theme;
+      if (theme === "dark")
+        document.getElementById("main").style.backgroundColor = "#042743";
+      else document.getElementById("main").style.backgroundColor = theme;
 
       showAlert("Dark Mode has been enabled", "success");
     } else {
       setMode("light");
-      document.body.style.backgroundColor = "white";
+      document.getElementById("main").style.backgroundColor = "white";
       showAlert("Light Mode has been enabled", "success");
     }
   };
@@ -44,22 +45,24 @@ function App() {
         mode={mode}
         toggleMode={toggleMode}
       />
-      <Alert alert={alert} />
-      <div className="container my-3">
-        <Routes>
-          <Route exact path="/about" element={<About />} />
-          <Route
-            exact
-            path="/"
-            element={
-              <TextForm
-                heading="Enter text to analyze below"
-                mode={mode}
-                showAlert={showAlert}
-              />
-            }
-          />
-        </Routes>
+      <div id="main" style={{ height: "100vh" }}>
+        <Alert alert={alert} />
+        <div className="container my-3">
+          <Routes>
+            <Route exact path="/about" element={<About mode={mode} />} />
+            <Route
+              exact
+              path="/"
+              element={
+                <TextForm
+                  heading="Try TextUtils - Word counter, Character counter"
+                  mode={mode}
+                  showAlert={showAlert}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
     </BrowserRouter>
   );
